@@ -114,6 +114,9 @@ posts.forEach(element => {
 
 
 
+// evento per cambio color del tasto mi piace
+let likedBtns = document.querySelectorAll(".like-button");
+
 const likedPosts = [];
 
 likedBtns.forEach(bottone => {
@@ -141,7 +144,7 @@ likedBtns.forEach(bottone => {
               likedPosts.pop(indiceBoxLike);
 
               console.log(likedPosts);
-
+              
         } else {
             // Se il bottone non ha la classe "active", esegui il comportamento precedente
 
