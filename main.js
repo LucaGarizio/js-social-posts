@@ -120,8 +120,8 @@ let likedBtns = document.querySelectorAll(".like-button");
 const likedPosts = [];
 
 likedBtns.forEach(bottone => {
-    bottone.addEventListener("click", function() {
-
+    bottone.addEventListener("click", function(event) {
+        event.preventDefault();
         const arrayLiked =[]
         // Verifica se il bottone ha già la classe "active"
         if (bottone.classList.contains("active")) {
