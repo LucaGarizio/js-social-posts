@@ -97,35 +97,70 @@ posts.forEach(element => {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${element.id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter ">${element.likes}</b> persone
+                        Piace a <b id="like-counter-${element.id}" class="js-likes-counter ">${element.likes}</b> persone
                     </div>
                 </div> 
             </div>            
         </div>`;
-        
+
     container.innerHTML += populateDom;
 });
 
 
-// evento per cambio color del tasto mi piace
-let likedBtn = document.querySelector(".like-button");
-likedBtn.addEventListener("click",
-    function() {
-    likedBtn.classList.add("active")
 
-    // controlla se il tasto mi piace è attivo e disattivalo al prossimo click
-    if (likedBtn.classList.contains("active")) {
-        let removeLiked = document.querySelector(".like-button");
-        removeLiked.addEventListener("click",
-            function() {
-                removeLiked.classList.remove("active");
-            });
-    };
+const likedPosts = [];
+
+likedBtns.forEach(bottone => {
+    bottone.addEventListener("click", function() {
+
+        const arrayLiked =[]
+        // Verifica se il bottone ha già la classe "active"
+        if (bottone.classList.contains("active")) {
+            // Se sì, rimuovi la classe "active"
+            bottone.classList.remove("active");
+
+            // Ottenere l'ID del post associato al bottone
+            let indiceBoxLike = bottone.getAttribute("data-postid");
+
+            // Ottenere il valore attuale del contatore
+            let sommaAttuale = parseInt(document.getElementById("like-counter-" + indiceBoxLike).innerHTML);
+
+            // Diminuire il contatore di 1
+            let sommaNuova = sommaAttuale - 1;
+
+            // Aggiornare il contatore nel DOM
+            document.getElementById("like-counter-" + indiceBoxLike).innerHTML = sommaNuova;
+
+              // rimuove i dati dall'array
+              likedPosts.pop(indiceBoxLike);
+
+              console.log(likedPosts);
+
+        } else {
+            // Se il bottone non ha la classe "active", esegui il comportamento precedente
+
+            bottone.classList.add("active");
+
+            // Ottenere l'ID del post associato al bottone
+            let indiceBoxLike = bottone.getAttribute("data-postid");
+
+            // Ottenere il valore attuale del contatore
+            let sommaAttuale = parseInt(document.getElementById("like-counter-" + indiceBoxLike).innerHTML);
+            // aumenta il contatore di 1
+            let sommaNuova = sommaAttuale + 1;
+            document.getElementById("like-counter-" + indiceBoxLike).innerHTML = sommaNuova;
+
+            // aggiorna l'array
+            likedPosts.push(indiceBoxLike);
+
+            console.log(likedPosts);
+        }
+    });
 });
 
