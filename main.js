@@ -103,10 +103,29 @@ posts.forEach(element => {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${element.likes}</b> persone
+                        Piace a <b id="like-counter-1" class="js-likes-counter ">${element.likes}</b> persone
                     </div>
                 </div> 
             </div>            
         </div>`;
+        
     container.innerHTML += populateDom;
 });
+
+
+// evento per cambio color del tasto mi piace
+let likedBtn = document.querySelector(".like-button");
+likedBtn.addEventListener("click",
+    function() {
+    likedBtn.classList.add("active")
+
+    // controlla se il tasto mi piace è attivo e disattivalo al prossimo click
+    if (likedBtn.classList.contains("active")) {
+        let removeLiked = document.querySelector(".like-button");
+        removeLiked.addEventListener("click",
+            function() {
+                removeLiked.classList.remove("active");
+            });
+    };
+});
+
