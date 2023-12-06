@@ -114,15 +114,13 @@ posts.forEach(element => {
 
 
 
-// evento per cambio color del tasto mi piace
 let likedBtns = document.querySelectorAll(".like-button");
 
-const likedPosts = [];
-
+// evento per cambio color del tasto mi piace
 likedBtns.forEach(bottone => {
     bottone.addEventListener("click", function(event) {
         event.preventDefault();
-        const arrayLiked =[]
+        const likedPosts = [];
         // Verifica se il bottone ha già la classe "active"
         if (bottone.classList.contains("active")) {
             // Se sì, rimuovi la classe "active"
@@ -132,32 +130,32 @@ likedBtns.forEach(bottone => {
             let indiceBoxLike = bottone.getAttribute("data-postid");
 
             // Ottenere il valore attuale del contatore
-            let sommaAttuale = parseInt(document.getElementById("like-counter-" + indiceBoxLike).innerHTML);
+            let sommaAttuale = parseInt(document.getElementById(`like-counter-${indiceBoxLike}`).innerHTML);
 
             // Diminuire il contatore di 1
             let sommaNuova = sommaAttuale - 1;
 
             // Aggiornare il contatore nel DOM
-            document.getElementById("like-counter-" + indiceBoxLike).innerHTML = sommaNuova;
+            document.getElementById(`like-counter-${indiceBoxLike}`).innerHTML = sommaNuova;
 
-              // rimuove i dati dall'array
-              likedPosts.pop(indiceBoxLike);
+            // rimuove i dati dall'array
+            likedPosts.pop(indiceBoxLike);
 
-              console.log(likedPosts);
+            console.log(likedPosts);
               
         } else {
-            // Se il bottone non ha la classe "active", esegui il comportamento precedente
-
+            // Se il bottone non ha la classe "active"
             bottone.classList.add("active");
 
-            // Ottenere l'ID del post associato al bottone
+            // // Ottenere l'ID del post associato al bottone
             let indiceBoxLike = bottone.getAttribute("data-postid");
 
-            // Ottenere il valore attuale del contatore
-            let sommaAttuale = parseInt(document.getElementById("like-counter-" + indiceBoxLike).innerHTML);
+            // // Ottenere il valore attuale del contatore
+            let sommaAttuale = parseInt(document.getElementById(`like-counter-${indiceBoxLike}`).innerHTML);
+
             // aumenta il contatore di 1
             let sommaNuova = sommaAttuale + 1;
-            document.getElementById("like-counter-" + indiceBoxLike).innerHTML = sommaNuova;
+            document.getElementById(`like-counter-${indiceBoxLike}`).innerHTML = sommaNuova;
 
             // aggiorna l'array
             likedPosts.push(indiceBoxLike);
